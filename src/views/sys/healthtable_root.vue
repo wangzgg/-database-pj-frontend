@@ -71,7 +71,7 @@
           <el-input
               v-model="search1"
               size="mini"
-              placeholder="输入学号查询">
+              placeholder="输入学号搜索">
             <el-button slot="append" icon="el-icon-search" style="float: left"></el-button>
           </el-input>
         </template>
@@ -90,38 +90,6 @@ export default {
     return {
       search:'',
       search1:'',
-      forbiddenForm: {
-        userId:'',
-        status:''
-      },
-
-      total: 0,
-      size: 100,
-      current: 1,
-
-      dialogVisible:false,
-      editForm: {
-        username:'',
-        password:'',
-        email:'',
-        role:''
-      },
-      editFormRules: {
-        username: [
-          {required: true, message: '请输入用户名', trigger: 'blur'}
-        ],
-        password: [
-          {required: true, message: '请输入密码', trigger: 'blur'}
-        ],
-        email: [
-          {required: true, message: '请输入邮箱', trigger: 'blur'}
-        ],
-        ban: [
-          {required: true, message: '', trigger: 'blur'}
-        ],
-
-      },
-
       tableData: [
       ],
 

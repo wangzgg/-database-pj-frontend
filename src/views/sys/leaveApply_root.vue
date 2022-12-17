@@ -1,56 +1,80 @@
 <template>
 
   <div>
-    <div style="text-align: center;margin: 20px">
-      <el-radio-group v-model="radio">
-        <el-radio :label="0">离校申请</el-radio>
-        <el-radio :label="1">入校申请</el-radio>
-      </el-radio-group>
-    </div>
-
 
     <el-table
         ref="multipleTable"
-        :data="tableData.filter(data => !search || data.orderDate.toLowerCase().includes(search.toLowerCase()))"
+        :data="tableData"
         tooltip-effect="dark"
         style="width: 100%"
         border
         stripe>
 
       <el-table-column
-          prop="orderId"
-          label="订单编号"
-          width="120">
+          prop="stu_number"
+          label="学号">
       </el-table-column>
 
       <el-table-column
-          prop="orderUser"
-          label="下单用户"
-      >
-      </el-table-column>
-
-
-      <el-table-column
-          prop="orderMoney"
-          label="金额"
-      sortable>
+          prop="stu_name"
+          label="姓名">
       </el-table-column>
 
       <el-table-column
-          sortable
-          prop="orderDate"
-          label="下单日期">
+          prop="leave_reason"
+          label="出校原因">
       </el-table-column>
 
       <el-table-column
-          prop="orderState"
-          label="订单状态"
-          :filters="[{ text: '已支付', value: 1 },{ text: '未支付', value: 0 }]"
+          prop="destination"
+          label="目的地">
+      </el-table-column>
+
+      <el-table-column
+          prop="departure_date"
+          label="计划离校时间">
+      </el-table-column>
+
+      <el-table-column
+          prop="estimated_return_time"
+          label="预计返校时间">
+      </el-table-column>
+
+      <el-table-column
+          prop="handlers"
+          label="处理人">
+      </el-table-column>
+
+      <el-table-column
+          prop="handle_time"
+          label="处理时间">
+      </el-table-column>
+
+      <el-table-column
+          prop="suggestion"
+          label="处理意见">
+      </el-table-column>
+
+      <el-table-column
+          prop="handle_reason"
+          label="理由">
+      </el-table-column>
+
+      <el-table-column
+          prop="final_suggestion"
+          label="最终意见">
+      </el-table-column>
+
+      <el-table-column
+          prop="handle_status"
+          label="处理状态"
+          :filters="[{ text: '待审核', value: 0 },{ text: '已同意', value: 1 },{ text: '已拒绝', value: 2 }]"
           :filter-method="filterTag1"
           filter-placement="bottom-end">
         <template slot-scope="scope">
-          <el-tag size="small" v-if="scope.row.orderState === 1" type="success">已支付</el-tag>
-          <el-tag size="small" v-else-if="scope.row.orderState === 0" type="danger">未支付</el-tag>
+          <el-tag size="small" v-if="scope.row.handle_status === 0" >待审核</el-tag>
+          <el-tag size="small" v-else-if="scope.row.handle_status === 1" type="success">已同意</el-tag>
+          <el-tag size="small" v-else-if="scope.row.handle_status === 2" type="danger">已拒绝</el-tag>
         </template>
       </el-table-column>
 
@@ -68,27 +92,7 @@ export default {
   name: "orderManage",
   data() {
     return {
-      radio: '',
       search:'',
-      forbiddenForm: {
-        userId:'',
-        status:''
-      },
-
-      total: 0,
-      size: 100,
-      current: 1,
-
-      dialogVisible:false,
-      editForm: {
-        orderId:'',
-        orderDate:'',
-        orderUser:'',
-        orderMoney:'',
-        orderState:''
-      },
-
-
       tableData: [
       ],
 
@@ -100,18 +104,11 @@ export default {
   },
   methods:{
     filterTag1(value, row) {
-      return row.orderState === value;
+      return row.handle_status === value;
     },
     getOrderList() {
-      this.$axios.get('/allOrders',{
-        params:{
-          size:this.size,
-          current:this.current
-        }
-      }).then(res => {
-        this.tableData = res.data.list
-        this.total= res.data.total
-        this.current= res.data.current
+      this.$axios.get('/root/leave').then(res => {
+        this.tableData = res.data.data
       })
     },
     // submitForm(formName) {

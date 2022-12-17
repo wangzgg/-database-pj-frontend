@@ -18,18 +18,18 @@ export default new Router({
           path: '/userManage1',
           name: 'userManage',
 
-          component: () => import( './views/sys/userManage.vue')
+          component: () => import( './views/sys/healthtable_root.vue')
         },
         {
           path: '/orderManage1',
           name: 'orderManage',
 
-          component: () => import( './views/sys/orderManage.vue')
+          component: () => import( './views/sys/leaveApply_root.vue')
         }, {
           path: '/goodsManage1',
           name: 'goodsManage',
 
-          component: () => import( './views/sys/goodsManage.vue')
+          component: () => import( './views/sys/access_root.vue')
         }
       ]
     },
@@ -44,18 +44,18 @@ export default new Router({
           path: '/userManage2',
           name: 'userManage',
 
-          component: () => import( './views/sys/userManage.vue')
+          component: () => import( './views/sys/healthtable_root.vue')
         },
         {
           path: '/orderManage2',
           name: 'orderManage',
 
-          component: () => import( './views/sys/orderManage.vue')
+          component: () => import( './views/sys/leaveApply_root.vue')
         }, {
           path: '/goodsManage2',
           name: 'goodsManage',
 
-          component: () => import( './views/sys/goodsManage.vue')
+          component: () => import( './views/sys/access_root.vue')
         }
       ]
     },
@@ -63,25 +63,35 @@ export default new Router({
       path: '/',
       name: 'admin',
 
-      component: () => import( './views/admin.vue'),
+      component: () => import( './views/root.vue'),
       children:[
 
         {
-          path: '/userManage',
+          path: '/healthtable_root',
           name: 'userManage',
 
-          component: () => import( './views/sys/userManage.vue')
+          component: () => import( './views/sys/healthtable_root.vue')
         },
         {
-          path: '/orderManage',
+          path: '/leaveApply_root',
           name: 'orderManage',
 
-          component: () => import( './views/sys/orderManage.vue')
+          component: () => import( './views/sys/leaveApply_root.vue')
+        },{
+          path: '/enterApply_root',
+          name: 'enterApply_root',
+
+          component: () => import( './views/sys/enterApply_root.vue')
         }, {
-          path: '/goodsManage',
+          path: '/access_root',
           name: 'goodsManage',
 
-          component: () => import( './views/sys/goodsManage.vue')
+          component: () => import( './views/sys/access_root.vue')
+        }, {
+          path: '/leaveTime',
+          name: 'leaveTime',
+
+          component: () => import( './views/sys/leaveTime_root.vue')
         }
       ]
     },
@@ -96,18 +106,18 @@ export default new Router({
           path: '/userManage3',
           name: 'userManage',
 
-          component: () => import( './views/sys/userManage.vue')
+          component: () => import( './views/sys/healthtable_root.vue')
         },
         {
           path: '/orderManage3',
           name: 'orderManage',
 
-          component: () => import( './views/sys/orderManage.vue')
+          component: () => import( './views/sys/leaveApply_root.vue')
         }, {
           path: '/goodsManage3',
           name: 'goodsManage',
 
-          component: () => import( './views/sys/goodsManage.vue')
+          component: () => import( './views/sys/access_root.vue')
         }
       ]
     },

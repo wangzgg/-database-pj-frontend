@@ -18,25 +18,31 @@
           </template>
         </el-menu-item>
 
-        <router-link to="/userManage" @click="this.$store.active=2">
+        <router-link to="/healthtable_root" @click="this.$store.active=2">
           <el-menu-item index="2">
             <span slot="title">查询过去n天填报信息</span>
           </el-menu-item>
         </router-link>
 
-        <router-link to="/goodsManage">
+        <router-link to="/access_root">
           <el-menu-item index="3" @click="this.$store.active=3">
             <span slot="title">查询入校权限</span>
           </el-menu-item>
         </router-link>
 
-        <router-link to="/orderManage" @click="this.$store.active=3">
+        <router-link to="/leaveApply_root" @click="this.$store.active=3">
           <el-menu-item index="4">
-            <span slot="title">查询出入校申请</span>
+            <span slot="title">查询出校申请</span>
           </el-menu-item>
         </router-link>
 
-        <router-link to="/orderManage" @click="this.$store.active=3">
+        <router-link to="/enterApply_root" @click="this.$store.active=3">
+          <el-menu-item index="6">
+            <span slot="title">查询入校申请</span>
+          </el-menu-item>
+        </router-link>
+
+        <router-link to="/leaveTime" @click="this.$store.active=3">
           <el-menu-item index="5">
             <span slot="title">查询过去一年离校总时长</span>
           </el-menu-item>
