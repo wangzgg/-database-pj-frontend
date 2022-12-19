@@ -117,7 +117,7 @@ export default {
       })
     },
     filterTag1(value, row) {
-      return row.handle_status === value;
+      return row.status === value;
     },
     getOrderList() {
       this.$axios.get('/root/enter').then(res => {
