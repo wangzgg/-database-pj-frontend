@@ -71,6 +71,16 @@ export default new Router({
           name: 'userManage',
 
           component: () => import( './views/sys/healthtable_root.vue')
+        },{
+          path: '/record_most_root',
+          name: 'record_most_root',
+
+          component: () => import( './views/sys/record_most_root.vue')
+        }, {
+          path: '/same_root',
+          name: 'same_root',
+
+          component: () => import( './views/sys/same_root.vue')
         },  {
           path: '/stay_root',
           name: 'stay_root',

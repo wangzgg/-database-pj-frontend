@@ -1,7 +1,7 @@
 <template>
   <el-container>
 
-    <el-aside width="200px" color="#3a4249">
+    <el-aside width="220px" color="#3a4249">
       <el-menu
           :default-active="$route.path"
           class="el-menu-vertical-demo"
@@ -81,6 +81,18 @@
         <router-link to="/stay_school" @click="this.$store.active=3">
           <el-menu-item index="/stay_school">
             <span slot="title">一直在校未曾出校的学生</span>
+          </el-menu-item>
+
+        </router-link>
+        <router-link to="/same_root" @click="this.$store.active=3">
+          <el-menu-item index="/same_root">
+            <span slot="title">填写健康日报完全一致的学生</span>
+          </el-menu-item>
+        </router-link>
+
+        <router-link to="/record_most_root" @click="this.$store.active=3">
+          <el-menu-item index="/record_most_root">
+            <span slot="title">每个院系学生出入最多的校区</span>
           </el-menu-item>
         </router-link>
 
