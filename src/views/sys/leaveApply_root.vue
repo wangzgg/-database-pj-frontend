@@ -122,10 +122,10 @@ export default {
       })
     },
     filterTag1(value, row) {
-      return row.handle_status === value;
+      return row.status === value;
     },
     getOrderList() {
-      this.$axios.get('/root/leave').then(res => {
+      this.$axios.get('http://127.0.0.1:4523/m1/2068548-0-default/root/leave').then(res => {
         this.tableData = res.data.data
       })
     },
