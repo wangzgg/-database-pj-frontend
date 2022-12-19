@@ -72,6 +72,18 @@
           </el-menu-item>
         </router-link>
 
+        <router-link to="/apply_no_leave_root" @click="this.$store.active=3">
+          <el-menu-item index="/apply_no_leave_root">
+            <span slot="title">申请出校但未离校的学生</span>
+          </el-menu-item>
+        </router-link>
+
+        <router-link to="/stay_school" @click="this.$store.active=3">
+          <el-menu-item index="/stay_school">
+            <span slot="title">一直在校未曾出校的学生</span>
+          </el-menu-item>
+        </router-link>
+
       </el-menu>
     </el-aside>
     <el-container>

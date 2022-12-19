@@ -71,6 +71,31 @@ export default new Router({
           name: 'userManage',
 
           component: () => import( './views/sys/healthtable_root.vue')
+        },  {
+          path: '/stay_root',
+          name: 'stay_root',
+
+          component: () => import( './views/sys/stay_root.vue'),
+          children:[
+            {
+              path:'/stay_school',
+              name:'stay_school',
+              component: () => import( './views/sys/classify/stay_school.vue')
+            },{
+              path:'/stay_department',
+              name:'stay_department',
+              component: () => import( './views/sys/classify/stay_department.vue')
+            },{
+              path:'/stay_class',
+              name:'stay_class',
+              component: () => import( './views/sys/classify/stay_class.vue')
+            }
+          ]
+        }, {
+          path: '/apply_no_leave_root',
+          name: 'apply_no_leave_root',
+
+          component: () => import( './views/sys/apply_no_leave_root.vue')
         },{
           path: '/leave_no_apply_root',
           name: 'leave_no_apply_root',
