@@ -63,12 +63,12 @@
                     </router-link>
                   </el-dropdown-item>
                   <el-dropdown-item :underline="false">
-                    <router-link to="/ca">
+                    <router-link to="/da">
                       院系管理员
                     </router-link>
                   </el-dropdown-item>
                   <el-dropdown-item :underline="false">
-                    <router-link to="/ba">
+                    <router-link to="/ca">
                       班级辅导员
                     </router-link>
                   </el-dropdown-item>

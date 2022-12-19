@@ -54,7 +54,7 @@
             <div style="float: right">
               <el-dropdown>
           <span class="el-dropdown-link" >
-            院系管理员<i class="el-icon-arrow-down el-icon--right"></i>
+            班级辅导员<i class="el-icon-arrow-down el-icon--right"></i>
           </span>
                 <el-dropdown-menu slot="dropdown">
                   <el-dropdown-item :underline="false">
@@ -63,12 +63,12 @@
                     </router-link>
                   </el-dropdown-item>
                   <el-dropdown-item :underline="false">
-                    <router-link to="/ca">
+                    <router-link to="/da">
                       院系管理员
                     </router-link>
                   </el-dropdown-item>
                   <el-dropdown-item :underline="false">
-                    <router-link to="/ba">
+                    <router-link to="/ca">
                       班级辅导员
                     </router-link>
                   </el-dropdown-item>
@@ -93,7 +93,7 @@
 
 <script>
 export default {
-  name: "collegeAdmin"
+  name: "ba"
 }
 </script>
 

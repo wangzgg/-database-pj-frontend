@@ -1,7 +1,18 @@
 <template>
 
   <div>
-
+    <el-form :inline="true" style="margin-top:5px ">
+      <el-form-item>
+        <el-input
+            v-model="search"
+            placeholder="查询过去n天尚未批准的申请"
+            align="right"
+            height="80px">
+          <el-button slot="append" icon="el-icon-search" style="float: left" @click.native="getdays"></el-button>
+        </el-input>
+      </el-form-item>
+    </el-form>
+<div style="text-align: center" v-if="this.total !== -1">共{{this.total}}条</div>
     <el-table
         ref="multipleTable"
         :data="tableData"
@@ -66,15 +77,15 @@
       </el-table-column>
 
       <el-table-column
-          prop="handle_status"
+          prop="status"
           label="处理状态"
-          :filters="[{ text: '待审核', value: 0 },{ text: '已同意', value: 1 },{ text: '已拒绝', value: 2 }]"
+          :filters="[{ text: '待审核', value: '待审核' },{ text: '已同意', value: '已同意' },{ text: '已拒绝', value: '已拒绝' }]"
           :filter-method="filterTag1"
           filter-placement="bottom-end">
         <template slot-scope="scope">
-          <el-tag size="small" v-if="scope.row.handle_status === 0" >待审核</el-tag>
-          <el-tag size="small" v-else-if="scope.row.handle_status === 1" type="success">已同意</el-tag>
-          <el-tag size="small" v-else-if="scope.row.handle_status === 2" type="danger">已拒绝</el-tag>
+          <el-tag size="small" v-if="scope.row.status === '待审核'" >待审核</el-tag>
+          <el-tag size="small" v-else-if="scope.row.status === '已同意' " type="success">已同意</el-tag>
+          <el-tag size="small" v-else-if="scope.row.status === '已拒绝' " type="danger">已拒绝</el-tag>
         </template>
       </el-table-column>
 
@@ -92,6 +103,7 @@ export default {
   name: "orderManage",
   data() {
     return {
+      total:-1,
       search:'',
       tableData: [
       ],
@@ -103,6 +115,12 @@ export default {
 
   },
   methods:{
+    getdays(){
+      this.$axios.get('/root/leave/noPass').then(res => {
+        this.tableData = res.data.data.list
+        this.total=res.data.data.total
+      })
+    },
     filterTag1(value, row) {
       return row.handle_status === value;
     },

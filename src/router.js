@@ -34,10 +34,10 @@ export default new Router({
       ]
     },
     {
-      path: '/ba',
+      path: '/ca',
       name: 'ba',
 
-      component: () => import( './views/banjiAdmin.vue'),
+      component: () => import( './views/classAdmin.vue'),
       children:[
 
         {
@@ -71,6 +71,31 @@ export default new Router({
           name: 'userManage',
 
           component: () => import( './views/sys/healthtable_root.vue')
+        },{
+          path: '/leaving_root',
+          name: 'leaving_root',
+
+          component: () => import( './views/sys/leaving_root.vue')
+        },{
+          path: '/enter_most_root',
+          name: 'enter_most_root',
+
+          component: () => import( './views/sys/enter_most_root.vue'),
+          children:[
+            {
+              path:'/enter_most_school',
+              name:'enter_most_school',
+              component: () => import( './views/sys/classify/enter_most_school.vue')
+            },{
+              path:'/enter_most_department',
+              name:'enter_most_department',
+              component: () => import( './views/sys/classify/enter_most_department.vue')
+            },{
+              path:'/enter_most_class',
+              name:'enter_most_class',
+              component: () => import( './views/sys/classify/enter_most_class.vue')
+            }
+          ]
         },
         {
           path: '/leaveApply_root',
@@ -96,10 +121,10 @@ export default new Router({
       ]
     },
     {
-      path: '/ca',
+      path: '/da',
       name: 'collegeAdmin',
 
-      component: () => import( './views/collegeAdmin.vue'),
+      component: () => import( './views/departmentAdmin.vue'),
       children:[
 
         {

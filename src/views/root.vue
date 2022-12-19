@@ -3,7 +3,7 @@
 
     <el-aside width="200px" color="#3a4249">
       <el-menu
-          :default-active="this.$store.state.active"
+          :default-active="$route.path"
           class="el-menu-vertical-demo"
           @open="handleOpen"
           @close="handleClose"
@@ -19,32 +19,44 @@
         </el-menu-item>
 
         <router-link to="/healthtable_root" @click="this.$store.active=2">
-          <el-menu-item index="2">
+          <el-menu-item index="/healthtable_root">
             <span slot="title">查询过去n天填报信息</span>
           </el-menu-item>
         </router-link>
 
         <router-link to="/access_root">
-          <el-menu-item index="3" @click="this.$store.active=3">
+          <el-menu-item index="/access_root" @click="this.$store.active=3">
             <span slot="title">查询入校权限</span>
           </el-menu-item>
         </router-link>
 
         <router-link to="/leaveApply_root" @click="this.$store.active=3">
-          <el-menu-item index="4">
+          <el-menu-item index="/leaveApply_root">
             <span slot="title">查询出校申请</span>
           </el-menu-item>
         </router-link>
 
         <router-link to="/enterApply_root" @click="this.$store.active=3">
-          <el-menu-item index="6">
+          <el-menu-item index="/enterApply_root">
             <span slot="title">查询入校申请</span>
           </el-menu-item>
         </router-link>
 
         <router-link to="/leaveTime" @click="this.$store.active=3">
-          <el-menu-item index="5">
+          <el-menu-item index="/leaveTime">
             <span slot="title">查询过去一年离校总时长</span>
+          </el-menu-item>
+        </router-link>
+
+        <router-link to="/enter_most_root" @click="this.$store.active=3">
+          <el-menu-item index="/enter_most_root">
+            <span slot="title">查询入校申请最多的学生</span>
+          </el-menu-item>
+        </router-link>
+
+        <router-link to="/leaving_root" @click="this.$store.active=3">
+          <el-menu-item index="/leaving_root">
+            <span slot="title">查询处于离校状态的学生</span>
           </el-menu-item>
         </router-link>
 
@@ -72,12 +84,12 @@
                     </router-link>
                   </el-dropdown-item>
                   <el-dropdown-item :underline="false">
-                    <router-link to="/ca">
+                    <router-link to="/da">
                       院系管理员
                     </router-link>
                   </el-dropdown-item>
                   <el-dropdown-item :underline="false">
-                    <router-link to="/ba">
+                    <router-link to="/ca">
                       班级辅导员
                     </router-link>
                   </el-dropdown-item>
