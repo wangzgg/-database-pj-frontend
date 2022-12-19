@@ -16,44 +16,6 @@
       </el-menu>
     </div>
     <div><router-view></router-view></div>
-<!--  <el-form :inline="true" style="margin-top:5px ">-->
-<!--    <el-form-item>-->
-<!--      <el-radio-group v-model="radio">-->
-<!--        <el-radio :label="3">全校</el-radio>-->
-<!--        <el-radio :label="6">院系</el-radio>-->
-<!--        <el-radio :label="9">班级</el-radio>-->
-<!--      </el-radio-group>-->
-<!--    </el-form-item>-->
-<!--    <el-form-item>-->
-<!--      <el-input-->
-<!--          v-model="search"-->
-<!--          placeholder="前n 个提交入校申请最多的学生"-->
-<!--          align="right"-->
-<!--          height="80px">-->
-<!--        <el-button slot="append" icon="el-icon-search" style="float: left" @click.native="getdays"></el-button>-->
-<!--      </el-input>-->
-<!--    </el-form-item>-->
-<!--  </el-form>-->
-
-<!--  <el-table-->
-<!--      ref="multipleTable"-->
-<!--      :data="tableData"-->
-<!--      tooltip-effect="dark"-->
-<!--      style="width: 100%"-->
-<!--      border-->
-<!--      stripe>-->
-
-<!--    <el-table-column-->
-<!--        prop="stu_number"-->
-<!--        label="学号">-->
-<!--    </el-table-column>-->
-
-<!--    <el-table-column-->
-<!--        prop="stu_name"-->
-<!--        label="姓名">-->
-<!--    </el-table-column>-->
-
-<!--  </el-table>-->
   </div>
 </template>
 

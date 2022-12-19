@@ -43,8 +43,8 @@
       </el-table-column>
 
       <el-table-column
-          prop="total"
-          label="次数">
+          prop="average_leave_time"
+          label="平均离校时间">
       </el-table-column>
     </el-table>
 
@@ -55,7 +55,7 @@
 
 <script>
 export default {
-  name: "enter_most_class",
+  name: "average_leave_time_most_class",
   data(){
     return{
       search:'',
@@ -65,7 +65,7 @@ export default {
   },
   methods:{
     getdays(){
-      this.$axios.get('/root/enter/most/class',{
+      this.$axios.get('http://127.0.0.1:4523/m1/2068548-0-default/root/leave/most/class',{
         params:{
           id:this.search,
           num:this.search1

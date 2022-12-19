@@ -116,7 +116,11 @@ export default {
   },
   methods:{
     getdays(){
-      this.$axios.get('/root/leave/noPass').then(res => {
+      this.$axios.get('/root/leave/noPass',{
+        params:{
+          days:this.search
+        }
+      }).then(res => {
         this.tableData = res.data.data.list
         this.total=res.data.data.total
       })

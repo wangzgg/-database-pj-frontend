@@ -72,6 +72,31 @@ export default new Router({
 
           component: () => import( './views/sys/healthtable_root.vue')
         },{
+          path: '/leave_no_apply_root',
+          name: 'leave_no_apply_root',
+
+          component: () => import( './views/sys/leave_no_apply_root.vue')
+        },{
+          path: '/average_leave_time_most_root',
+          name: 'average_leave_time_most_root',
+
+          component: () => import( './views/sys/average_leave_time_most_root.vue'),
+          children:[
+            {
+              path:'/average_leave_time_most_school',
+              name:'average_leave_time_most_school',
+              component: () => import( './views/sys/classify/average_leave_time_most_school.vue')
+            },{
+              path:'/average_leave_time_most_department',
+              name:'average_leave_time_most_department',
+              component: () => import( './views/sys/classify/average_leave_time_most_department.vue')
+            },{
+              path:'/average_leave_time_most_class',
+              name:'average_leave_time_most_class',
+              component: () => import( './views/sys/classify/average_leave_time_most_class.vue')
+            }
+          ]
+        },{
           path: '/leaving_root',
           name: 'leaving_root',
 

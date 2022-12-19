@@ -5,7 +5,7 @@
         <el-form-item>
           <el-input
               v-model="search"
-              placeholder="输入班级id"
+              placeholder="输入院系名称"
               align="right"
               height="80px">
           </el-input>
@@ -43,8 +43,8 @@
       </el-table-column>
 
       <el-table-column
-          prop="total"
-          label="次数">
+          prop="average_leave_time"
+          label="平均离校时间">
       </el-table-column>
     </el-table>
 
@@ -55,7 +55,7 @@
 
 <script>
 export default {
-  name: "enter_most_class",
+  name: "average_leave_time_most_department",
   data(){
     return{
       search:'',
@@ -65,9 +65,9 @@ export default {
   },
   methods:{
     getdays(){
-      this.$axios.get('/root/enter/most/class',{
+      this.$axios.get('/root/leave/most/department',{
         params:{
-          id:this.search,
+          department_name:this.search,
           num:this.search1
         }
       }).then(res => {

@@ -48,15 +48,27 @@
           </el-menu-item>
         </router-link>
 
-        <router-link to="/enter_most_root" @click="this.$store.active=3">
+        <router-link to="/enter_most_school" @click="this.$store.active=3">
           <el-menu-item index="/enter_most_root">
             <span slot="title">查询入校申请最多的学生</span>
+          </el-menu-item>
+        </router-link>
+
+        <router-link to="/average_leave_time_most_school" @click="this.$store.active=3">
+          <el-menu-item index="/average_leave_time_most_root">
+            <span slot="title">查询平均离校时长最长的学生</span>
           </el-menu-item>
         </router-link>
 
         <router-link to="/leaving_root" @click="this.$store.active=3">
           <el-menu-item index="/leaving_root">
             <span slot="title">查询处于离校状态的学生</span>
+          </el-menu-item>
+        </router-link>
+
+        <router-link to="/leave_no_apply_root" @click="this.$store.active=3">
+          <el-menu-item index="/leave_no_apply_root">
+            <span slot="title">未申请但离校超过24h的学生</span>
           </el-menu-item>
         </router-link>
 
@@ -116,34 +128,6 @@
 import qs from 'qs'
 export default {
   name: "admin",
-  data (){
-    return {
-      userInfo: {
-        userId:"",
-        username:"",
-
-      }
-    }
-  },
-  methods: {
-    getUserInfo() {
-      this.userInfo.userId=this.$store.state.userId;
-      this.$axios.get("GameStore/user/"+qs.stringify(this.userInfo.id)).then(res => {
-        this.userInfo.username = res.data.username;
-        console.log("人员信息：",res.data.username);
-      })
-    },
-    logout() {
-      this.$axios.get("/GameStore/logout").then(res => {
-        console.log(res.data.data)
-        //退出要删除数据
-        this.$store.commit('set_userId',-1);
-        // sessionStorage.clear()
-        // this.$store.commit("resetState")
-        this.$router.push("/login")
-      })
-    }
-  }
 }
 </script>
 
