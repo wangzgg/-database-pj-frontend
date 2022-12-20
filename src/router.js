@@ -71,7 +71,7 @@ export default new Router({
           name: 'userManage',
 
           component: () => import( './views/sys/healthtable_root.vue')
-        },{
+        }, {
           path: '/record_most_root',
           name: 'record_most_root',
 
@@ -173,7 +173,7 @@ export default new Router({
 
           component: () => import( './views/sys/access_root.vue')
         }, {
-          path: '/leaveTime',
+          path: '/leaveTime_root',
           name: 'leaveTime',
 
           component: () => import( './views/sys/leaveTime_root.vue')
@@ -188,22 +188,112 @@ export default new Router({
       children:[
 
         {
-          path: '/userManage3',
-          name: 'userManage',
+          path: '/healthtable_da',
+          name: 'healthtable_da',
 
-          component: () => import( './views/sys/healthtable_root.vue')
+          component: () => import( './views/sys/healthtable_da.vue')
+        },{
+          path: '/record_most_da',
+          name: 'record_most_da',
+
+          component: () => import( './views/sys/record_most_da.vue')
+        },{
+          path: '/same_da',
+          name: 'same_da',
+
+          component: () => import( './views/sys/same_da.vue')
+        },{
+          path: '/stay_da',
+          name: 'stay_da',
+
+          component: () => import( './views/sys/stay_da.vue'),
+          children: [
+            {
+              path: '/stay_department_da',
+              name: 'stay_department_da',
+
+              component: () => import( './views/sys/classify/stay_department_da.vue')
+            },{
+              path: '/stay_class_da',
+              name: 'stay_class_da',
+
+              component: () => import( './views/sys/classify/stay_class_da.vue')
+            },
+          ]
+        },{
+          path: '/apply_no_leave_da',
+          name: 'apply_no_leave_da',
+
+          component: () => import( './views/sys/apply_no_leave_da.vue')
+        },{
+          path: '/leaving_da',
+          name: 'leaving_da',
+
+          component: () => import( './views/sys/leaving_da.vue')
+        },{
+          path: '/leave_no_apply_da',
+          name: 'leave_no_apply_da',
+
+          component: () => import( './views/sys/leave_no_apply_da.vue')
+        },{
+          path: '/access_da',
+          name: 'access_da',
+
+          component: () => import( './views/sys/access_da.vue')
+        },{
+          path: '/leaveApply_da',
+          name: 'leaveApply_da',
+
+          component: () => import( './views/sys/leaveApply_da.vue')
+        },{
+          path: '/enterApply_da',
+          name: 'enterApply_da',
+
+          component: () => import( './views/sys/enterApply_da.vue')
+        },{
+          path: '/leaveTime_da',
+          name: 'leaveTime_da',
+
+          component: () => import( './views/sys/leaveTime_da.vue')
+        },{
+          path: '/enter_most_da',
+          name: 'enter_most_da',
+
+          component: () => import( './views/sys/enter_most_da.vue'),
+          children: [
+            {
+              path: '/enter_most_department_da',
+              name: 'enter_most_department_da',
+
+              component: () => import( './views/sys/classify/enter_most_department_da.vue')
+            },{
+              path: '/enter_most_class_da',
+              name: 'enter_most_class_da',
+
+              component: () => import( './views/sys/classify/enter_most_class_da.vue')
+            },
+          ]
         },
         {
-          path: '/orderManage3',
-          name: 'orderManage',
+          path: '/average_leave_time_most_da',
+          name: 'average_leave_time_most_da',
 
-          component: () => import( './views/sys/leaveApply_root.vue')
-        }, {
-          path: '/goodsManage3',
-          name: 'goodsManage',
+          component: () => import( './views/sys/average_leave_time_most_da.vue'),
+          children: [
+            {
+              path: '/average_leave_time_most_department_da',
+              name: 'average_leave_time_most_department_da',
 
-          component: () => import( './views/sys/access_root.vue')
-        }
+              component: () => import( './views/sys/classify/average_leave_time_most_department_da.vue')
+            },   {
+              path: '/average_leave_time_most_class_da',
+              name: 'average_leave_time_most_class_da',
+
+              component: () => import( './views/sys/classify/average_leave_time_most_class_da.vue')
+            },
+          ]
+        },
+
       ]
     },
   ]

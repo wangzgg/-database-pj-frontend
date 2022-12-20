@@ -84,7 +84,7 @@
 
 <script>
 export default {
-  name: "userManage",
+  name: "healthtable_da",
   data() {
     return {
       search:'',
@@ -99,8 +99,9 @@ export default {
 
     getAll(){
       this.$axios.get(
-          '/root/info',{
+          '/department/info',{
         params:{
+          id: +sessionStorage.getItem('department'),
           days:this.search
         }
       }).then(res => {

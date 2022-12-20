@@ -65,7 +65,7 @@ export default {
   },
   methods:{
     getdays(){
-      this.$axios.get('http://127.0.0.1:4523/m1/2068548-0-default/root/leave/most/class',{
+      this.$axios.get('/root/leave/most/class',{
         params:{
           id:this.search,
           num:this.search1

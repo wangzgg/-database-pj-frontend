@@ -42,20 +42,20 @@
           </el-menu-item>
         </router-link>
 
-        <router-link to="/leaveTime" @click="this.$store.active=3">
-          <el-menu-item index="/leaveTime">
+        <router-link to="/leaveTime_root" @click="this.$store.active=3">
+          <el-menu-item index="/leaveTime_root">
             <span slot="title">查询过去一年离校总时长</span>
           </el-menu-item>
         </router-link>
 
         <router-link to="/enter_most_school" @click="this.$store.active=3">
-          <el-menu-item index="/enter_most_root">
+          <el-menu-item index="/enter_most_school">
             <span slot="title">查询入校申请最多的学生</span>
           </el-menu-item>
         </router-link>
 
         <router-link to="/average_leave_time_most_school" @click="this.$store.active=3">
-          <el-menu-item index="/average_leave_time_most_root">
+          <el-menu-item index="/average_leave_time_most_school">
             <span slot="title">查询平均离校时长最长的学生</span>
           </el-menu-item>
         </router-link>
@@ -119,10 +119,12 @@
                       超级用户
                     </router-link>
                   </el-dropdown-item>
-                  <el-dropdown-item :underline="false">
-                    <router-link to="/da">
+                  <el-dropdown-item :underline="false" >
+                    <router-link to="/da" >
                       院系管理员
                     </router-link>
+<!--                    <el-button type="text" @click="dialogFormVisible = true">打开嵌套表单的 Dialog</el-button>-->
+
                   </el-dropdown-item>
                   <el-dropdown-item :underline="false">
                     <router-link to="/ca">
@@ -146,12 +148,23 @@
       </el-main>
     </el-container>
   </el-container>
+
+
 </template>
 
 <script>
 import qs from 'qs'
 export default {
   name: "admin",
+  data(){
+    return{
+      department_num:0,
+      dialogFormVisible:false,
+    }
+  },
+  // created() {
+  //   sessionStorage.setItem("department",'');
+  // }
 }
 </script>
 
