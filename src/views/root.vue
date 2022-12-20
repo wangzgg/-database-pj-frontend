@@ -3,13 +3,14 @@
 
     <el-aside width="220px" color="#3a4249">
       <el-menu
-          :default-active="$route.path"
+          :default-active="path"
           class="el-menu-vertical-demo"
           @open="handleOpen"
           @close="handleClose"
           background-color="#3a4249"
           text-color="#fff"
-          active-text-color="#ffd04b">
+          active-text-color="#ffd04b"
+          @select="handleSelect">
 
         <el-menu-item index="Index">
           <template slot="title">
@@ -158,10 +159,17 @@ export default {
   name: "admin",
   data(){
     return{
+      path:sessionStorage.getItem('key'),
       department_num:0,
       dialogFormVisible:false,
     }
   },
+  methods:{
+    handleSelect(key, keyPath) {
+      console.log(key, keyPath);
+      sessionStorage.setItem("key",key)
+    },
+  }
   // created() {
   //   sessionStorage.setItem("department",'');
   // }

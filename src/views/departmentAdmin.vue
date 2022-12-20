@@ -3,13 +3,14 @@
 
     <el-aside width="200px" color="#3a4249">
       <el-menu
-          :default-active="$route.path"
+          :default-active="path"
           class="el-menu-vertical-demo"
           @open="handleOpen"
           @close="handleClose"
           background-color="#3a4249"
           text-color="#fff"
-          active-text-color="#ffd04b">
+          active-text-color="#ffd04b"
+          @select="handleSelect">
 
         <el-menu-item index="Index">
           <template slot="title">
@@ -180,14 +181,24 @@ export default {
   name: "collegeAdmin",
   data(){
     return{
+      path:sessionStorage.getItem('key'),
       department:sessionStorage.getItem('department'),
       department_num:'',
       dialogFormVisible: true,
     }
   },
   methods:{
+      handleSelect(key, keyPath) {
+        console.log(key, keyPath);
+        sessionStorage.setItem("key",key)
+    },
     queren(){
-      sessionStorage.setItem("department",this.department)
+      sessionStorage.setItem("department",this.department);
+      this.$message({
+        showClose: true,
+        message: '确认成功',
+        type: 'success',
+      });
     }
   }
 }

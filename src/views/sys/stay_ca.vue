@@ -47,10 +47,10 @@ export default {
   },
   methods:{
     getdays(){
-      this.$axios.get('/department/stay',{
+      this.$axios.get('/class/stay',{
         params:{
           days:this.search,
-          id: +sessionStorage.getItem('department')
+          id: +sessionStorage.getItem('classAdmin')
         }
       }).then(res => {
         this.tableData = res.data.data

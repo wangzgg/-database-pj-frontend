@@ -1,17 +1,5 @@
 <template>
   <div>
-    <el-form :inline="true" style="margin-top: 5px">
-      <el-form-item>
-        <el-input
-            v-model="search"
-            placeholder="输入要查询的天数"
-            align="right"
-            height="80px">
-          <el-button slot="append" icon="el-icon-search" style="float: left" @click.native="getAll" ></el-button>
-        </el-input>
-      </el-form-item>
-    </el-form>
-    <div style="text-align: center" v-if="this.total !== -1">共{{this.total}}条</div>
     <el-table
         ref="multipleTable"
         :data="tableData"
@@ -61,32 +49,30 @@
       </el-table-column>
 
     </el-table>
+    <div style="text-align: center" v-if="this.total !== -1">共{{this.total}}条</div>
   </div>
 </template>
 
 <script>
 export default {
-  name: "same_root",
+  name: "apply_no_leave_root",
   data() {
     return {
       total:-1,
-      search:'',
       tableData: [
       ],
-
     }
   },
-
+  created() {
+    this.getList()
+  },
   methods:{
-
-    getAll(){
-      this.$axios.get(
-          '/department/same',{
-            params:{
-              id: +sessionStorage.getItem('department'),
-              days:this.search
-            }
-          }).then(res => {
+    getList(){
+      this.$axios.get('/class/apply/noLeave',{
+        params:{
+          id: +sessionStorage.getItem('classAdmin')
+        }
+      }).then(res => {
         this.tableData = res.data.data.list
         this.total=res.data.data.total
       })

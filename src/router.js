@@ -41,22 +41,72 @@ export default new Router({
       children:[
 
         {
-          path: '/userManage2',
-          name: 'userManage',
+          path: '/healthtable_ca',
+          name: 'healthtable_ca',
 
-          component: () => import( './views/sys/healthtable_root.vue')
-        },
-        {
-          path: '/orderManage2',
-          name: 'orderManage',
-
-          component: () => import( './views/sys/leaveApply_root.vue')
+          component: () => import( './views/sys/healthtable_ca.vue')
         }, {
-          path: '/goodsManage2',
-          name: 'goodsManage',
+          path: '/access_ca',
+          name: 'access_ca',
 
-          component: () => import( './views/sys/access_root.vue')
-        }
+          component: () => import( './views/sys/access_ca.vue')
+        },{
+          path: '/leaveApply_ca',
+          name: 'leaveApply_ca',
+
+          component: () => import( './views/sys/leaveApply_ca.vue')
+        },{
+          path: '/enterApply_ca',
+          name: 'enterApply_ca',
+
+          component: () => import( './views/sys/enterApply_ca.vue')
+        },{
+          path: '/leaveTime_ca',
+          name: 'leaveTime_ca',
+
+          component: () => import( './views/sys/leaveTime_ca.vue')
+        },{
+          path: '/enter_most_ca',
+          name: 'enter_most_ca',
+
+          component: () => import( './views/sys/enter_most_ca.vue')
+        },{
+          path: '/average_leave_time_most_ca',
+          name: 'average_leave_time_most_ca',
+
+          component: () => import( './views/sys/average_leave_time_most_ca.vue')
+        },{
+          path: '/leaving_ca',
+          name: 'leaving_ca',
+
+          component: () => import( './views/sys/leaving_ca.vue')
+        },{
+          path: '/leave_no_apply_ca',
+          name: 'leave_no_apply_ca',
+
+          component: () => import( './views/sys/leave_no_apply_ca.vue')
+        },{
+          path: '/apply_no_leave_ca',
+          name: 'apply_no_leave_ca',
+
+          component: () => import( './views/sys/apply_no_leave_ca.vue')
+        },{
+          path: '/stay_ca',
+          name: 'stay_ca',
+
+          component: () => import( './views/sys/stay_ca.vue')
+        },{
+          path: '/same_ca',
+          name: 'same_ca',
+
+          component: () => import( './views/sys/same_ca.vue')
+        },{
+          path: '/other_ca',
+          name: 'other_ca',
+
+          component: () => import( './views/sys/other_ca.vue')
+        },
+
       ]
     },
     {

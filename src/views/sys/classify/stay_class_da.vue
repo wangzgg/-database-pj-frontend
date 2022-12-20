@@ -76,7 +76,7 @@ export default {
   },
   methods:{
     getdays(){
-      this.$axios.get('/departmen/stay/class',{
+      this.$axios.get('/department/stay/class',{
         params:{
           id: +sessionStorage.getItem('department'),
           num:this.search
