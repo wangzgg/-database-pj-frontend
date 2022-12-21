@@ -10,7 +10,7 @@ import Element from 'element-ui'
 //没有权限的话可以调到登陆页面
 import router from "./router"
 //全局定义，先随便定义一下，不和8080重复
-axios.defaults.baseURL = "http://192.168.1.9:8080"
+axios.defaults.baseURL = "http://127.0.0.1:4523/m1/2068548-0-default"
 
 
 const request = axios.create({

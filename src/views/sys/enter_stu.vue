@@ -1,18 +1,6 @@
 <template>
 
   <div>
-    <el-form :inline="true" style="margin-top:5px ">
-      <el-form-item>
-        <el-input
-            v-model="search"
-            placeholder="查询过去n天尚未批准的申请"
-            align="right"
-            height="80px">
-          <el-button slot="append" icon="el-icon-search" style="float: left" @click.native="getdays"></el-button>
-        </el-input>
-      </el-form-item>
-    </el-form>
-<div style="text-align: center" v-if="this.total !== -1">共{{this.total}}条</div>
     <el-table
         ref="multipleTable"
         :data="tableData"
@@ -32,23 +20,18 @@
       </el-table-column>
 
       <el-table-column
-          prop="leave_reason"
-          label="出校原因">
+          prop="return_school_reason"
+          label="入校原因">
       </el-table-column>
 
       <el-table-column
-          prop="destination"
-          label="目的地">
-      </el-table-column>
-
-      <el-table-column
-          prop="departure_date"
-          label="计划离校时间">
-      </el-table-column>
-
-      <el-table-column
-          prop="estimated_return_time"
+          prop="estimated_return_school_time"
           label="预计返校时间">
+      </el-table-column>
+
+      <el-table-column
+          prop="location_of_seven_days"
+          label="七天内所到地">
       </el-table-column>
 
       <el-table-column
@@ -100,7 +83,7 @@
 
 <script>
 export default {
-  name: "leaveApply_da",
+  name: "enterApply_da",
   data() {
     return {
       total:-1,
@@ -115,53 +98,18 @@ export default {
 
   },
   methods:{
-    getdays(){
-      this.$axios.get('/class/leave/noPass',{
-        params:{
-          id: +sessionStorage.getItem('classAdmin'),
-          days:this.search
-        }
-      }).then(res => {
-        this.tableData = res.data.data.list
-        this.total=res.data.data.total
-      })
-    },
     filterTag1(value, row) {
       return row.status === value;
     },
     getOrderList() {
-      this.$axios.get('/class/leave',{
+      this.$axios.get('/stu/enter',{
         params:{
-          id: +sessionStorage.getItem('classAdmin')
-        }}).then(res => {
+          id: +sessionStorage.getItem('stu')
+        }
+      }).then(res => {
         this.tableData = res.data.data
       })
     },
-    // submitForm(formName) {
-    //   this.$refs[formName].validate((valid) => {
-    //     if (valid) {
-    //       this.$axios.post('/user/add' , this.editForm)
-    //           .then(res => {
-    //
-    //             if(res.data.status === 200) {
-    //               this.$message({
-    //                 showClose: true,
-    //                 message: '恭喜你，操作成功',
-    //                 type: 'success',
-    //                 onClose: () => {
-    //                   this.getUserList()
-    //                 }
-    //               });
-    //             }
-    //
-    //             this.dialogVisible = false
-    //           })
-    //     } else {
-    //       console.log('error submit!!');
-    //       return false;
-    //     }
-    //   });
-    // },
     resetForm(formName) {
       this.$refs[formName].resetFields();
       this.dialogVisible = false

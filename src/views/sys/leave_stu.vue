@@ -1,18 +1,6 @@
 <template>
 
   <div>
-    <el-form :inline="true" style="margin-top:5px ">
-      <el-form-item>
-        <el-input
-            v-model="search"
-            placeholder="查询过去n天尚未批准的申请"
-            align="right"
-            height="80px">
-          <el-button slot="append" icon="el-icon-search" style="float: left" @click.native="getdays"></el-button>
-        </el-input>
-      </el-form-item>
-    </el-form>
-<div style="text-align: center" v-if="this.total !== -1">共{{this.total}}条</div>
     <el-table
         ref="multipleTable"
         :data="tableData"
@@ -20,16 +8,6 @@
         style="width: 100%"
         border
         stripe>
-
-      <el-table-column
-          prop="stu_number"
-          label="学号">
-      </el-table-column>
-
-      <el-table-column
-          prop="stu_name"
-          label="姓名">
-      </el-table-column>
 
       <el-table-column
           prop="leave_reason"
@@ -115,24 +93,13 @@ export default {
 
   },
   methods:{
-    getdays(){
-      this.$axios.get('/class/leave/noPass',{
-        params:{
-          id: +sessionStorage.getItem('classAdmin'),
-          days:this.search
-        }
-      }).then(res => {
-        this.tableData = res.data.data.list
-        this.total=res.data.data.total
-      })
-    },
     filterTag1(value, row) {
       return row.status === value;
     },
     getOrderList() {
-      this.$axios.get('/class/leave',{
+      this.$axios.get('/stu/leave',{
         params:{
-          id: +sessionStorage.getItem('classAdmin')
+          id: +sessionStorage.getItem('stu')
         }}).then(res => {
         this.tableData = res.data.data
       })

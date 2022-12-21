@@ -15,22 +15,31 @@ export default new Router({
       children:[
 
         {
-          path: '/userManage1',
-          name: 'userManage',
+          path: '/healthtable_stu',
+          name: 'healthtable_stu',
 
-          component: () => import( './views/sys/healthtable_root.vue')
+          component: () => import( './views/sys/healthtable_stu.vue')
+        },{
+          path: '/info_stu',
+          name: 'info_stu',
+
+          component: () => import( './views/sys/info_stu.vue')
+        },{
+          path: '/leave_stu',
+          name: 'leave_stu',
+
+          component: () => import( './views/sys/leave_stu.vue')
+        },{
+          path: '/enter_stu',
+          name: 'enter_stu',
+
+          component: () => import( './views/sys/enter_stu.vue')
+        },{
+          path: '/class_stu',
+          name: 'class_stu',
+
+          component: () => import( './views/sys/class_stu.vue')
         },
-        {
-          path: '/orderManage1',
-          name: 'orderManage',
-
-          component: () => import( './views/sys/leaveApply_root.vue')
-        }, {
-          path: '/goodsManage1',
-          name: 'goodsManage',
-
-          component: () => import( './views/sys/access_root.vue')
-        }
       ]
     },
     {

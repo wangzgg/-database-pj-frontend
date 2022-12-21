@@ -3,10 +3,11 @@
 
     <el-aside width="200px" color="#3a4249">
       <el-menu
-          :default-active="this.$store.state.active"
+          :default-active="path"
           class="el-menu-vertical-demo"
           @open="handleOpen"
           @close="handleClose"
+          @select="handleSelect"
           background-color="#3a4249"
           text-color="#fff"
           active-text-color="#ffd04b">
@@ -18,24 +19,33 @@
           </template>
         </el-menu-item>
 
-        <router-link to="/userManage" @click="this.$store.active=2">
-          <el-menu-item index="2">
-            <i class="el-icon-menu"></i>
-            <span slot="title">用户管理</span>
+        <router-link to="/info_stu" @click="this.$store.active=2">
+          <el-menu-item index="info_stu">
+            <span slot="title">个人信息</span>
           </el-menu-item>
         </router-link>
 
-        <router-link to="/goodsManage">
-          <el-menu-item index="3" @click="this.$store.active=3">
-            <i class="el-icon-document"></i>
-            <span slot="title">游戏管理</span>
+        <router-link to="/healthtable_stu" @click="this.$store.active=2">
+          <el-menu-item index="healthtable_stu">
+            <span slot="title">我的健康日报</span>
           </el-menu-item>
         </router-link>
 
-        <router-link to="/orderManage" @click="this.$store.active=3">
-          <el-menu-item index="4">
-            <i class="el-icon-setting"></i>
-            <span slot="title">订单管理</span>
+        <router-link to="/leave_stu" @click="this.$store.active=2">
+          <el-menu-item index="leave_stu">
+            <span slot="title">我的出校申请</span>
+          </el-menu-item>
+        </router-link>
+
+        <router-link to="/enter_stu" @click="this.$store.active=2">
+          <el-menu-item index="enter_stu">
+            <span slot="title">我的入校申请</span>
+          </el-menu-item>
+        </router-link>
+
+        <router-link to="/class_stu" @click="this.$store.active=2">
+          <el-menu-item index="class_stu">
+            <span slot="title">班级统计数据</span>
           </el-menu-item>
         </router-link>
 
@@ -44,7 +54,13 @@
     <el-container>
       <el-header style="height: 55px;  ">
         <el-row>
-          <el-col :span="8"><div>&nbsp;</div></el-col>
+          <el-col :span="8">
+            <div style="width: 200px">
+              <el-input size="mini" v-model="stu" autocomplete="off" placeholder="输入你的学号" >
+                <el-button slot="append" style="float: left" @click="queren">确认</el-button>
+              </el-input>
+            </div>
+          </el-col>
           <el-col :span="8">
             <div style="text-align: center">
               <strong style="font-size: 20px;text-align: center">学生进出校管理系统</strong>
@@ -97,31 +113,23 @@ export default {
   name: "stu",
   data (){
     return {
-      userInfo: {
-        userId:"",
-        username:"",
-
-      }
+      stu:sessionStorage.getItem('stu'),
+      path:sessionStorage.getItem('key'),
     }
   },
   methods: {
-    getUserInfo() {
-      this.userInfo.userId=this.$store.state.userId;
-      this.$axios.get("GameStore/user/"+qs.stringify(this.userInfo.id)).then(res => {
-        this.userInfo.username = res.data.username;
-        console.log("人员信息：",res.data.username);
-      })
+    queren(){
+      sessionStorage.setItem("stu",this.stu);
+      this.$message({
+        showClose: true,
+        message: '确认成功',
+        type: 'success',
+      });
     },
-    logout() {
-      this.$axios.get("/GameStore/logout").then(res => {
-        console.log(res.data.data)
-        //退出要删除数据
-        this.$store.commit('set_userId',-1);
-        // sessionStorage.clear()
-        // this.$store.commit("resetState")
-        this.$router.push("/login")
-      })
-    }
+    handleSelect(key, keyPath) {
+      console.log(key, keyPath);
+      sessionStorage.setItem("key",key)
+    },
   }
 }
 </script>
