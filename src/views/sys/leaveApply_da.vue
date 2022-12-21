@@ -84,6 +84,7 @@
           filter-placement="bottom-end">
         <template slot-scope="scope">
           <el-tag size="small" v-if="scope.row.status === '待审核'" >待审核</el-tag>
+          <el-button v-if="scope.row.status === '待审核'" type="text" size="small" class="button" @click="check(scope.row.pipeline_id)">去审核>></el-button>
           <el-tag size="small" v-else-if="scope.row.status === '已同意' " type="success">已同意</el-tag>
           <el-tag size="small" v-else-if="scope.row.status === '已拒绝' " type="danger">已拒绝</el-tag>
         </template>
@@ -92,7 +93,35 @@
     </el-table>
 
 
+    <!--对话框-->
+    <el-dialog
+        title="审核出入校申请"
+        :visible.sync="dialogVisible"
+        width="600px"
+        :before-close="handleClose">
 
+      <el-form :model="editForm" :rules="editFormRules" ref="editForm" label-width="100px" class="demo-editForm">
+
+        <el-form-item label="处理意见" prop="suggestion" label-width="100px">
+          <el-select v-model="editForm.suggestion" placeholder="选择处理意见">
+            <el-option label="同意" value="同意"></el-option>
+            <el-option label="拒绝" value="拒绝"></el-option>
+          </el-select>
+        </el-form-item>
+
+        <el-form-item label="理由" prop="reason" label-width="100px">
+          <el-input v-model="editForm.reason" autocomplete="off"></el-input>
+        </el-form-item>
+
+        <el-form-item>
+          <el-button type="primary" @click="submitForm('editForm')">提交</el-button>
+          <el-button @click="resetForm('editForm')">重置</el-button>
+        </el-form-item>
+      </el-form>
+
+
+
+    </el-dialog>
 
 
   </div>
@@ -103,11 +132,22 @@ export default {
   name: "leaveApply_da",
   data() {
     return {
+      dialogVisible:false,
       total:-1,
       search:'',
       tableData: [
       ],
-
+      editForm:{
+        pipeline_id:0,
+        id: +sessionStorage.getItem('department'),
+        suggestion:'',
+        reason:''
+      },
+      editFormRules: {
+        suggestion: [
+          {required: true, message: '请选择处理意见', trigger: 'blur'}
+        ],
+      },
     }
   },
   created(){
@@ -115,6 +155,41 @@ export default {
 
   },
   methods:{
+    submitForm(formName) {
+      if(this.editForm.suggestion === '拒绝' && this.editForm.reason===''){
+        this.$message({
+          showClose: true,
+          message: '请填写理由',
+          type: 'error',
+        });
+        return false;
+      }
+      //上传表单
+      this.$refs[formName].validate((valid) => {
+        if (valid) {
+          this.$axios.post('/department/handle' , this.editForm)
+              .then(res => {
+                if(res.data.code === 200) {
+                  this.$message({
+                    showClose: true,
+                    message: '审核成功',
+                    type: 'success',
+                  });
+                  this.dialogVisible = false;
+                  this.editForm.suggestion='';
+                  this.editForm.reason='';
+                }
+              })
+        } else {
+          console.log('error submit!!');
+          return false;
+        }
+      });
+    },
+    check(id){
+      this.dialogVisible=true;
+      this.editForm.pipeline_id=id;
+    },
     getdays(){
       this.$axios.get('/department/leave/noPass',{
         params:{
@@ -165,7 +240,8 @@ export default {
     resetForm(formName) {
       this.$refs[formName].resetFields();
       this.dialogVisible = false
-      this.editForm = {}
+      this.editForm.suggestion='';
+      this.editForm.reason='';
     },
     handleClose() {
       this.resetForm('editForm')

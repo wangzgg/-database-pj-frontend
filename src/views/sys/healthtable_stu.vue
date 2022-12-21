@@ -19,7 +19,7 @@
       <el-col :span="8">
         <el-form :inline="true" style="margin-top: 5px">
             <el-form-item>
-              <el-button type="primary" @click="dialogVisible = true">填写健康日报</el-button>
+              <el-button type="primary" @click="fill">填写健康日报</el-button>
             </el-form-item>
         </el-form>
       </el-col>
@@ -42,6 +42,19 @@
         <el-form-item label="姓名" prop="stu_name" label-width="100px">
           <el-input v-model="editForm.stu_name" autocomplete="off"></el-input>
         </el-form-item>
+
+        <el-form-item label="体温" prop="temperature" label-width="100px">
+          <el-input v-model="editForm.temperature" autocomplete="off"></el-input>
+        </el-form-item>
+
+        <el-form-item label="位置" prop="location" label-width="100px">
+          <el-input v-model="editForm.location" autocomplete="off"></el-input>
+        </el-form-item>
+
+        <el-form-item label="其他信息" prop="other_message" label-width="100px">
+          <el-input type="textarea" v-model="editForm.other_message" autocomplete="off"></el-input>
+        </el-form-item>
+
 
 
         <el-form-item>
@@ -104,10 +117,11 @@ export default {
       editForm:{
         stu_number:'',
         stu_name:'',
-        leave_reason:'',
-        destination:'',
-        departure_date:'',
-        estimated_return_time:''
+        date:'',
+        temperature:'',
+        location:'',
+        time:'',
+        other_message:''
       },
       editFormRules: {
         stu_number: [
@@ -116,28 +130,62 @@ export default {
         stu_name: [
           {required: true, message: '请输入姓名', trigger: 'blur'}
         ],
-        leave_reason: [
-          {required: true, message: '请输入离校原因', trigger: 'blur'}
+        temperature: [
+          {required: true, message: '请输入体温', trigger:'blur'}
         ],
-        destination: [
-          {required: true, message: '请输入目的地', trigger:'blur'}
+        location: [
+          {required: true, message: '请输入位置', trigger: 'blur'}
         ],
-        departure_date: [
-          {required: true, message: '请选择离校日期', trigger: 'blur'}
-        ],
-        estimated_return_time: [
-          {required: true, message: '请选择预计返校时间', trigger: 'blur'}
-        ],
+
 
       },
     }
   },
 
   methods:{
+    submitForm(formName) {
+      var myDate=new Date();
+      this.editForm.date=myDate.toLocaleDateString(); //获取当前日期
+      this.editForm.time=myDate.toLocaleTimeString(); //获取当前时间
+      this.editForm.stu_number= +this.editForm.stu_number;
+      //上传表单
+      this.$refs[formName].validate((valid) => {
+        if (valid) {
+          this.$axios.post('/stu/health/add' , this.editForm)
+              .then(res => {
+                if(res.data.code === 200) {
+                  this.$message({
+                    showClose: true,
+                    message: '提交成功',
+                    type: 'success',
+                  });
+                  this.dialogVisible = false
+                  this.editForm.location='';
+                  this.editForm.temperature='';
+                  this.editForm.other_message='';
+                }
+              })
+        } else {
+          console.log('error submit!!');
+          return false;
+        }
+      });
+    },
+    fill(){
+      this.dialogVisible = true;
+      this.$axios.get(
+          '/stu/info',{
+            params:{
+              id: +sessionStorage.getItem('stu'),
+            }
+          }).then(res => {
+        this.editForm.stu_name = res.data.data.stu_name
+        this.editForm.stu_number = res.data.data.stu_number
+      })
+    },
     resetForm(formName) {
       this.$refs[formName].resetFields();
       this.dialogVisible = false
-      this.editForm = {}
     },
     handleClose() {
       this.resetForm('editForm')
