@@ -1,6 +1,12 @@
 <template>
 
   <div>
+    <el-form :inline="true" style="margin-top:5px ">
+      <el-form-item>
+        <el-button type="primary" @click="dialogVisible = true">新增申请</el-button>
+      </el-form-item>
+    </el-form>
+
     <el-table
         ref="multipleTable"
         :data="tableData"
@@ -70,7 +76,59 @@
     </el-table>
 
 
+    <!--新增对话框-->
+    <el-dialog
+        title="新增游戏"
+        :visible.sync="dialogVisible"
+        width="600px"
+        :before-close="handleClose">
 
+      <el-form :model="editForm" :rules="editFormRules" ref="editForm" label-width="100px" class="demo-editForm">
+
+        <el-form-item label="学号" prop="stu_number" label-width="100px">
+          <el-input v-model="editForm.stu_number" autocomplete="off"></el-input>
+        </el-form-item>
+
+        <el-form-item label="姓名" prop="stu_name" label-width="100px">
+          <el-input v-model="editForm.stu_name" autocomplete="off"></el-input>
+        </el-form-item>
+
+        <el-form-item label="离校原因" prop="leave_reason" label-width="100px">
+          <el-input type="textarea" v-model="editForm.leave_reason" autocomplete="off"></el-input>
+        </el-form-item>
+
+        <el-form-item label="目的地" prop="destination" label-width="100px">
+          <el-input v-model="editForm.destination" autocomplete="off"></el-input>
+        </el-form-item>
+
+        <el-form-item label="离校日期" prop="departure_date" label-width="110px">
+          <el-date-picker
+              v-model="editForm.departure_date"
+              type="datetime"
+              value-format="yyyy-MM-dd HH:mm:ss"
+              placeholder="选择日期时间">
+          </el-date-picker>
+
+        </el-form-item>
+
+        <el-form-item label="预计返校时间" prop="estimated_return_time" label-width="110px">
+          <el-date-picker
+              v-model="editForm.estimated_return_time"
+              type="datetime"
+              value-format="yyyy-MM-dd HH:mm:ss"
+              placeholder="选择日期时间">
+          </el-date-picker>
+        </el-form-item>
+
+        <el-form-item>
+          <el-button type="primary" @click="submitForm('editForm')">提交</el-button>
+          <el-button @click="resetForm('editForm')">重置</el-button>
+        </el-form-item>
+      </el-form>
+
+
+
+    </el-dialog>
 
 
   </div>
@@ -81,6 +139,36 @@ export default {
   name: "leaveApply_da",
   data() {
     return {
+      editForm:{
+        stu_number:'',
+        stu_name:'',
+        leave_reason:'',
+        destination:'',
+        departure_date:'',
+        estimated_return_time:''
+      },
+      editFormRules: {
+        stu_number: [
+          {required: true, message: '请输入学号', trigger: 'blur'}
+        ],
+        stu_name: [
+          {required: true, message: '请输入姓名', trigger: 'blur'}
+        ],
+        leave_reason: [
+          {required: true, message: '请输入离校原因', trigger: 'blur'}
+        ],
+        destination: [
+          {required: true, message: '请输入目的地', trigger:'blur'}
+        ],
+        departure_date: [
+          {required: true, message: '请选择离校日期', trigger: 'blur'}
+        ],
+        estimated_return_time: [
+          {required: true, message: '请选择预计返校时间', trigger: 'blur'}
+        ],
+
+      },
+      dialogVisible:false,
       total:-1,
       search:'',
       tableData: [
@@ -93,6 +181,30 @@ export default {
 
   },
   methods:{
+    submitForm(formName) {
+      this.editForm.stu_number= +this.editForm.stu_number;
+      //上传表单
+      this.$refs[formName].validate((valid) => {
+        if (valid) {
+          this.$axios.post('/stu/leave/add' , this.editForm)
+              .then(res => {
+                if(res.data.code === 200) {
+                  this.$message({
+                    showClose: true,
+                    message: '提交成功',
+                    type: 'success',
+                  });
+                  this.getOrderList();
+                  this.editForm={};
+                }
+                this.dialogVisible = false
+              })
+        } else {
+          console.log('error submit!!');
+          return false;
+        }
+      });
+    },
     filterTag1(value, row) {
       return row.status === value;
     },

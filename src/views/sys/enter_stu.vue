@@ -1,6 +1,11 @@
 <template>
 
   <div>
+    <el-form :inline="true" style="margin-top:5px ">
+      <el-form-item>
+        <el-button type="primary" @click="dialogVisible = true">新增申请</el-button>
+      </el-form-item>
+    </el-form>
     <el-table
         ref="multipleTable"
         :data="tableData"
@@ -76,7 +81,65 @@
 
 
 
+    <!--新增对话框-->
+    <el-dialog
+        title="新增游戏"
+        :visible.sync="dialogVisible"
+        width="600px"
+        :before-close="handleClose">
 
+      <el-form :model="editForm" :rules="editFormRules" ref="editForm" label-width="100px" class="demo-editForm">
+
+        <el-form-item label="学号" prop="stu_number" label-width="100px">
+          <el-input v-model="editForm.stu_number" autocomplete="off"></el-input>
+        </el-form-item>
+
+        <el-form-item label="姓名" prop="stu_name" label-width="100px">
+          <el-input v-model="editForm.stu_name" autocomplete="off"></el-input>
+        </el-form-item>
+
+        <el-form-item label="进校原因" prop="return_school_reason" label-width="100px">
+          <el-input type="textarea" v-model="editForm.return_school_reason" autocomplete="off"></el-input>
+        </el-form-item>
+
+        <el-form-item label="预计进校时间" prop="estimated_return_school_time" label-width="110px">
+          <el-date-picker
+              v-model="editForm.estimated_return_school_time"
+              type="datetime"
+              value-format="yyyy-MM-dd HH:mm:ss"
+              placeholder="选择日期时间">
+          </el-date-picker>
+        </el-form-item>
+
+        <el-form-item label="七天内所到地" prop="location_of_seven_days" label-width="110px">
+          <el-input v-model="editForm.location_of_seven_days" autocomplete="off"></el-input>
+        </el-form-item>
+
+<!--        <el-form-item label="离校日期" prop="departure_date" label-width="110px">-->
+<!--          <el-date-picker-->
+<!--              v-model="editForm.departure_date"-->
+<!--              type="date"-->
+<!--              placeholder="选择日期">-->
+<!--          </el-date-picker>-->
+<!--        </el-form-item>-->
+
+<!--        <el-form-item label="预计返校时间" prop="estimated_return_time" label-width="110px">-->
+<!--          <el-date-picker-->
+<!--              v-model="editForm.estimated_return_time"-->
+<!--              type="date"-->
+<!--              placeholder="选择日期">-->
+<!--          </el-date-picker>-->
+<!--        </el-form-item>-->
+
+        <el-form-item>
+          <el-button type="primary" @click="submitForm('editForm')">提交</el-button>
+          <el-button @click="resetForm('editForm')">重置</el-button>
+        </el-form-item>
+      </el-form>
+
+
+
+    </el-dialog>
 
   </div>
 </template>
@@ -86,6 +149,32 @@ export default {
   name: "enterApply_da",
   data() {
     return {
+      editForm:{
+        stu_number:'',
+        stu_name:'',
+        return_school_reason:'',
+        estimated_return_school_time:'',
+        location_of_seven_days:'',
+      },
+      editFormRules: {
+        stu_number: [
+          {required: true, message: '请输入学号', trigger: 'blur'}
+        ],
+        stu_name: [
+          {required: true, message: '请输入姓名', trigger: 'blur'}
+        ],
+        return_school_reason: [
+          {required: true, message: '请输入进校原因', trigger: 'blur'}
+        ],
+        estimated_return_school_time: [
+          {required: true, message: '请选择预计进校时间', trigger:'blur'}
+        ],
+        location_of_seven_days: [
+          {required: true, message: '请输入七天内所到地', trigger: 'blur'}
+        ],
+
+      },
+      dialogVisible:false,
       total:-1,
       search:'',
       tableData: [
@@ -98,6 +187,30 @@ export default {
 
   },
   methods:{
+    submitForm(formName) {
+      this.editForm.stu_number= +this.editForm.stu_number;
+      //上传表单
+      this.$refs[formName].validate((valid) => {
+        if (valid) {
+          this.$axios.post('/stu/enter/add' , this.editForm)
+              .then(res => {
+                if(res.data.code === 200) {
+                  this.$message({
+                    showClose: true,
+                    message: '提交成功',
+                    type: 'success',
+                  });
+                  this.getOrderList();
+                  this.editForm={};
+                }
+                this.dialogVisible = false
+              })
+        } else {
+          console.log('error submit!!');
+          return false;
+        }
+      });
+    },
     filterTag1(value, row) {
       return row.status === value;
     },

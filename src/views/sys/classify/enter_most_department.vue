@@ -54,10 +54,15 @@
 </template>
 
 <script>
+import qs from 'qs'
 export default {
   name: "enter_most_department",
   data(){
     return{
+      form:{
+        department_name:this.search,
+        num:this.search1
+      },
       search:'',
       search1:'',
       tableData:[]
@@ -65,11 +70,11 @@ export default {
   },
   methods:{
     getdays(){
-      this.$axios.get('/root/enter/most/department',{
-        params:{
+
+      this.$axios.post('/root/enter/most/department', {
+
           department_name:this.search,
           num:this.search1
-        }
       }).then(res => {
         this.tableData = res.data.data
       })

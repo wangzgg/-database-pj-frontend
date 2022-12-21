@@ -1,17 +1,86 @@
 <template>
 
   <div>
-    <el-form :inline="true" style="margin-top: 5px">
-      <el-form-item>
-        <el-input
-            v-model="search"
-            placeholder="输入要查询的天数"
-            align="right"
-            height="80px">
-          <el-button slot="append" icon="el-icon-search" style="float: left" @click.native="getAll" ></el-button>
-        </el-input>
-      </el-form-item>
-    </el-form>
+
+    <el-row>
+      <el-col :span="8">
+        <el-form :inline="true" style="margin-top: 5px">
+          <el-form-item>
+            <el-input
+                v-model="search"
+                placeholder="输入要查询的天数"
+                align="right"
+                height="80px">
+              <el-button slot="append" icon="el-icon-search" style="float: left" @click.native="getAll" ></el-button>
+            </el-input>
+          </el-form-item>
+        </el-form>
+      </el-col>
+      <el-col :span="8">
+        <el-form :inline="true" style="margin-top: 5px">
+            <el-form-item>
+              <el-button type="primary" @click="dialogVisible = true">填写健康日报</el-button>
+            </el-form-item>
+        </el-form>
+      </el-col>
+      <el-col :span="8"><div class="grid-content bg-purple"></div></el-col>
+    </el-row>
+
+    <!--填写对话框-->
+    <el-dialog
+        title="填写健康日报"
+        :visible.sync="dialogVisible"
+        width="600px"
+        :before-close="handleClose">
+
+      <el-form :model="editForm" :rules="editFormRules" ref="editForm" label-width="100px" class="demo-editForm">
+
+        <el-form-item label="学号" prop="stu_number" label-width="100px">
+          <el-input v-model="editForm.stu_number" autocomplete="off"></el-input>
+        </el-form-item>
+
+        <el-form-item label="姓名" prop="stu_name" label-width="100px">
+          <el-input v-model="editForm.stu_name" autocomplete="off"></el-input>
+        </el-form-item>
+
+        <el-form-item label="离校原因" prop="leave_reason" label-width="100px">
+          <el-input type="textarea" v-model="editForm.leave_reason" autocomplete="off"></el-input>
+        </el-form-item>
+
+        <el-form-item label="目的地" prop="destination" label-width="100px">
+          <el-input v-model="editForm.destination" autocomplete="off"></el-input>
+        </el-form-item>
+
+        <el-form-item label="离校日期" prop="departure_date" label-width="110px">
+          <el-date-picker
+              v-model="editForm.departure_date"
+              type="datetime"
+              value-format="yyyy-MM-dd HH:mm:ss"
+              placeholder="选择日期时间">
+          </el-date-picker>
+
+        </el-form-item>
+
+        <el-form-item label="预计返校时间" prop="estimated_return_time" label-width="110px">
+          <el-date-picker
+              v-model="editForm.estimated_return_time"
+              type="datetime"
+              value-format="yyyy-MM-dd HH:mm:ss"
+              placeholder="选择日期时间">
+          </el-date-picker>
+        </el-form-item>
+
+        <el-form-item>
+          <el-button type="primary" @click="submitForm('editForm')">提交</el-button>
+          <el-button @click="resetForm('editForm')">重置</el-button>
+        </el-form-item>
+      </el-form>
+
+
+
+    </el-dialog>
+
+
 
     <el-table
         ref="multipleTable"
@@ -53,16 +122,52 @@ export default {
   name: "healthtable_ca",
   data() {
     return {
+      dialogVisible:false,
       search:'',
       search1:'',
       tableData: [
       ],
+      editForm:{
+        stu_number:'',
+        stu_name:'',
+        leave_reason:'',
+        destination:'',
+        departure_date:'',
+        estimated_return_time:''
+      },
+      editFormRules: {
+        stu_number: [
+          {required: true, message: '请输入学号', trigger: 'blur'}
+        ],
+        stu_name: [
+          {required: true, message: '请输入姓名', trigger: 'blur'}
+        ],
+        leave_reason: [
+          {required: true, message: '请输入离校原因', trigger: 'blur'}
+        ],
+        destination: [
+          {required: true, message: '请输入目的地', trigger:'blur'}
+        ],
+        departure_date: [
+          {required: true, message: '请选择离校日期', trigger: 'blur'}
+        ],
+        estimated_return_time: [
+          {required: true, message: '请选择预计返校时间', trigger: 'blur'}
+        ],
 
+      },
     }
   },
 
   methods:{
-
+    resetForm(formName) {
+      this.$refs[formName].resetFields();
+      this.dialogVisible = false
+      this.editForm = {}
+    },
+    handleClose() {
+      this.resetForm('editForm')
+    },
     getAll(){
       this.$axios.get(
           '/stu/health',{
