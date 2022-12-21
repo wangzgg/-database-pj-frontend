@@ -71,10 +71,11 @@ export default {
   methods:{
     getdays(){
 
-      this.$axios.post('/root/enter/most/department', {
-
-          department_name:this.search,
-          num:this.search1
+      this.$axios.get('/root/enter/most/department', {
+        params: {
+          department_name: this.search,
+          num: this.search1
+        }
       }).then(res => {
         this.tableData = res.data.data
       })

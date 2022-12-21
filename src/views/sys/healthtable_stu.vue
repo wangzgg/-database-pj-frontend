@@ -43,32 +43,6 @@
           <el-input v-model="editForm.stu_name" autocomplete="off"></el-input>
         </el-form-item>
 
-        <el-form-item label="离校原因" prop="leave_reason" label-width="100px">
-          <el-input type="textarea" v-model="editForm.leave_reason" autocomplete="off"></el-input>
-        </el-form-item>
-
-        <el-form-item label="目的地" prop="destination" label-width="100px">
-          <el-input v-model="editForm.destination" autocomplete="off"></el-input>
-        </el-form-item>
-
-        <el-form-item label="离校日期" prop="departure_date" label-width="110px">
-          <el-date-picker
-              v-model="editForm.departure_date"
-              type="datetime"
-              value-format="yyyy-MM-dd HH:mm:ss"
-              placeholder="选择日期时间">
-          </el-date-picker>
-
-        </el-form-item>
-
-        <el-form-item label="预计返校时间" prop="estimated_return_time" label-width="110px">
-          <el-date-picker
-              v-model="editForm.estimated_return_time"
-              type="datetime"
-              value-format="yyyy-MM-dd HH:mm:ss"
-              placeholder="选择日期时间">
-          </el-date-picker>
-        </el-form-item>
 
         <el-form-item>
           <el-button type="primary" @click="submitForm('editForm')">提交</el-button>

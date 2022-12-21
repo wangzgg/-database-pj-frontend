@@ -58,7 +58,7 @@ export default {
   },
   methods:{
     getdays(){
-      this.$axios.get('/root/enter/most/department',{
+      this.$axios.get('/root/stay/department',{
         params:{
           department_name:this.search,
           days:this.search1
