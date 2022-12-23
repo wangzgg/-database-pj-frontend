@@ -141,7 +141,8 @@ export default {
         id: +sessionStorage.getItem('classAdmin'),
         result:'',
         suggestion:'',
-        reason:''
+        reason:'',
+        type:'入校'
       },
       editFormRules: {
         result: [
