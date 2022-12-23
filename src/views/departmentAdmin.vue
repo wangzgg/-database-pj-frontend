@@ -122,26 +122,36 @@
             院系管理员<i class="el-icon-arrow-down el-icon--right"></i>
           </span>
                 <el-dropdown-menu slot="dropdown">
-                  <el-dropdown-item :underline="false">
-                    <router-link to="/">
+
+                  <router-link to="/">
+                    <el-dropdown-item :underline="false">
                       超级用户
-                    </router-link>
-                  </el-dropdown-item>
-                  <el-dropdown-item :underline="false">
-                    <router-link to="/da">
+                    </el-dropdown-item>
+                  </router-link>
+
+
+                  <router-link to="/da" >
+                    <el-dropdown-item :underline="false" >
                       院系管理员
-                    </router-link>
-                  </el-dropdown-item>
-                  <el-dropdown-item :underline="false">
-                    <router-link to="/ca">
+                    </el-dropdown-item>
+                  </router-link>
+                  <!--                    <el-button type="text" @click="dialogFormVisible = true">打开嵌套表单的 Dialog</el-button>-->
+
+
+
+                  <router-link to="/ca">
+                    <el-dropdown-item :underline="false">
                       班级辅导员
-                    </router-link>
-                  </el-dropdown-item>
-                  <el-dropdown-item :underline="false">
-                    <router-link to="/stu">
+                    </el-dropdown-item>
+                  </router-link>
+
+
+                  <router-link to="/stu">
+                    <el-dropdown-item :underline="false">
                       学生
-                    </router-link>
-                  </el-dropdown-item>
+                    </el-dropdown-item>
+                  </router-link>
+
                 </el-dropdown-menu>
               </el-dropdown>
             </div></el-col>

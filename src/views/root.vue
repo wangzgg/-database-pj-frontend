@@ -115,28 +115,36 @@
             超级用户<i class="el-icon-arrow-down el-icon--right"></i>
           </span>
                 <el-dropdown-menu slot="dropdown">
-                  <el-dropdown-item :underline="false">
+
                     <router-link to="/">
+                      <el-dropdown-item :underline="false">
                       超级用户
+                      </el-dropdown-item>
                     </router-link>
-                  </el-dropdown-item>
-                  <el-dropdown-item :underline="false" >
+
+
                     <router-link to="/da" >
+                      <el-dropdown-item :underline="false" >
                       院系管理员
+                      </el-dropdown-item>
                     </router-link>
 <!--                    <el-button type="text" @click="dialogFormVisible = true">打开嵌套表单的 Dialog</el-button>-->
 
-                  </el-dropdown-item>
-                  <el-dropdown-item :underline="false">
+
+
                     <router-link to="/ca">
+                      <el-dropdown-item :underline="false">
                       班级辅导员
+                      </el-dropdown-item>
                     </router-link>
-                  </el-dropdown-item>
-                  <el-dropdown-item :underline="false">
+
+
                     <router-link to="/stu">
+                      <el-dropdown-item :underline="false">
                       学生
+                      </el-dropdown-item>
                     </router-link>
-                  </el-dropdown-item>
+
                 </el-dropdown-menu>
               </el-dropdown>
             </div></el-col>

@@ -97,15 +97,19 @@
 
       <el-form :model="editForm" :rules="editFormRules" ref="editForm" label-width="100px" class="demo-editForm">
 
-        <el-form-item label="处理意见" prop="suggestion" label-width="100px">
-          <el-select v-model="editForm.suggestion" placeholder="选择处理意见">
+        <el-form-item label="审核结果" prop="result" label-width="100px">
+          <el-select v-model="editForm.result" placeholder="选择审核结果">
             <el-option label="同意" value="同意"></el-option>
             <el-option label="拒绝" value="拒绝"></el-option>
           </el-select>
         </el-form-item>
 
+        <el-form-item label="处理意见" prop="suggestion" label-width="100px">
+          <el-input v-model="editForm.suggestion" autocomplete="off" placeholder="请输入处理意见"></el-input>
+        </el-form-item>
+
         <el-form-item label="理由" prop="reason" label-width="100px">
-          <el-input v-model="editForm.reason" autocomplete="off"></el-input>
+          <el-input v-model="editForm.reason" autocomplete="off" placeholder="拒绝必须填写理由"></el-input>
         </el-form-item>
 
         <el-form-item>
@@ -135,12 +139,13 @@ export default {
       editForm:{
         pipeline_id:0,
         id: +sessionStorage.getItem('classAdmin'),
+        result:'',
         suggestion:'',
         reason:''
       },
       editFormRules: {
-        suggestion: [
-          {required: true, message: '请选择处理意见', trigger: 'blur'}
+        result: [
+          {required: true, message: '请选择审核结果', trigger: 'blur'}
         ],
       },
     }
@@ -155,7 +160,7 @@ export default {
       this.editForm.pipeline_id=id;
     },
     submitForm(formName) {
-      if(this.editForm.suggestion === '拒绝' && this.editForm.reason===''){
+      if(this.editForm.result === '拒绝' && this.editForm.reason===''){
         this.$message({
           showClose: true,
           message: '请填写理由',
@@ -176,6 +181,7 @@ export default {
                   });
                   this.dialogVisible = false;
                   this.editForm.suggestion='';
+                  this.editForm.result='';
                   this.editForm.reason='';
                 }
               })
@@ -212,6 +218,7 @@ export default {
       this.$refs[formName].resetFields();
       this.dialogVisible = false
       this.editForm.suggestion='';
+      this.editForm.result='';
       this.editForm.reason='';
     },
     handleClose() {

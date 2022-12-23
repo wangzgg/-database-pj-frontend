@@ -52,7 +52,7 @@
                 label="所在位置">
             </el-table-column>
             <el-table-column
-                prop="time"
+                prop="report_time"
                 label="填写时间">
             </el-table-column>
             <el-table-column
