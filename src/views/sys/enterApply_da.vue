@@ -108,7 +108,7 @@
         </el-form-item>
 
         <el-form-item label="理由" prop="reason" label-width="100px">
-          <el-input v-model="editForm.reason" autocomplete="off"></el-input>
+          <el-input v-model="editForm.reason" autocomplete="off" placeholder="拒绝必须填写理由"></el-input>
         </el-form-item>
 
         <el-form-item>
