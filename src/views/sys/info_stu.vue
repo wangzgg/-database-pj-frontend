@@ -48,8 +48,17 @@
       </el-form-item>
 
       <el-form-item label="证件类型" prop="id_card_type" label-width="100px">
-        <el-input v-model="data.id_card_type" autocomplete="off"></el-input>
+        <el-select v-model="data.id_card_type" placeholder="选择证件类型">
+          <el-option label="身份证" value="身份证"></el-option>
+          <el-option label="护照" value="护照"></el-option>
+          <el-option label="军官证" value="军官证"></el-option>
+          <el-option label="港澳通行证" value="港澳通行证"></el-option>
+          <el-option label="台胞证" value="台胞证"></el-option>
+          <el-option label="学生证" value="学生证"></el-option>
+          <el-option label="其他" value="其他"></el-option>
+        </el-select>
       </el-form-item>
+
 
       <el-form-item label="证件号码" prop="id_card_number" label-width="100px">
         <el-input v-model="data.id_card_number" autocomplete="off"></el-input>
