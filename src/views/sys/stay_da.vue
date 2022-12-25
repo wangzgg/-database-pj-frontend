@@ -5,11 +5,11 @@
 
 
         <el-menu-item index="/stay_department_da">
-          <router-link to="/stay_department_da">院系 </router-link>
+         院系
         </el-menu-item>
 
 
-        <el-menu-item index="/stay_class_da"><router-link to="/stay_class_da">班级</router-link></el-menu-item>
+        <el-menu-item index="/stay_class_da">班级</el-menu-item>
 
       </el-menu>
     </div>
@@ -19,7 +19,17 @@
 
 <script>
 export default {
-  name: "stay_da"
+  name: "stay_da",
+  methods:{
+    handleSelect(key, keyPath) {
+      console.log(key, keyPath);
+      if(key==="/stay_department_da"){
+        this.$router.push('/stay_department_da')
+      } if(key==="/stay_class_da"){
+        this.$router.push('/stay_class_da')
+      }
+    },
+  }
 }
 </script>
 

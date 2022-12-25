@@ -5,11 +5,11 @@
 
 
           <el-menu-item index="/enter_most_department_da">
-            <router-link to="/enter_most_department_da">院系 </router-link>
+           院系
           </el-menu-item>
 
 
-          <el-menu-item index="/enter_most_class_da"><router-link to="/enter_most_class_da">班级</router-link></el-menu-item>
+          <el-menu-item index="/enter_most_class_da">班级</el-menu-item>
 
       </el-menu>
     </div>
@@ -32,6 +32,14 @@ export default {
     }
   },
   methods:{
+    handleSelect(key, keyPath) {
+      console.log(key, keyPath);
+      if(key==="/enter_most_department_da"){
+        this.$router.push('/enter_most_department_da')
+      } if(key==="/enter_most_class_da"){
+        this.$router.push('/enter_most_class_da')
+      }
+    },
     handleClick(tab, event) {
       console.log(tab, event);
     },

@@ -3,15 +3,15 @@
     <div>
       <el-menu :default-active="$route.path" class="el-menu-demo" mode="horizontal" @select="handleSelect">
 
-          <el-menu-item index="/enter_most_school"><router-link to="/enter_most_school">全校 </router-link></el-menu-item>
+          <el-menu-item index="/enter_most_school">全校 </el-menu-item>
 
 
           <el-menu-item index="/enter_most_department">
-            <router-link to="/enter_most_department">院系 </router-link>
+           院系
           </el-menu-item>
 
 
-          <el-menu-item index="/enter_most_class"><router-link to="/enter_most_class">班级</router-link></el-menu-item>
+          <el-menu-item index="/enter_most_class">班级</el-menu-item>
 
       </el-menu>
     </div>
@@ -34,6 +34,16 @@ export default {
     }
   },
   methods:{
+    handleSelect(key, keyPath) {
+      console.log(key, keyPath);
+      if(key==="/enter_most_department"){
+        this.$router.push('/enter_most_department')
+      } if(key==="/enter_most_school"){
+        this.$router.push('/enter_most_school')
+      } if(key==="/enter_most_class"){
+        this.$router.push('/enter_most_class')
+      }
+    },
     handleClick(tab, event) {
       console.log(tab, event);
     },
