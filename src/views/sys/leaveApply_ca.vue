@@ -102,33 +102,6 @@
         :visible.sync="dialogVisible"
         width="600px"
         :before-close="handleClose">
-      <el-table
-          :data="tableData1"
-          style="width: 100%">
-        <el-table-column
-            prop="date"
-            label="填写日期">
-        </el-table-column>
-
-        <el-table-column
-            prop="temperature"
-            label="体温">
-        </el-table-column>
-
-        <el-table-column
-            prop="location"
-            label="所在位置">
-        </el-table-column>
-        <el-table-column
-            prop="report_time"
-            label="填写时间">
-        </el-table-column>
-        <el-table-column
-            prop="other_message"
-            label="其他信息">
-        </el-table-column>
-      </el-table>
-      <br>
       <el-form :model="editForm" :rules="editFormRules" ref="editForm" label-width="100px" class="demo-editForm">
 
         <el-form-item label="审核结果" prop="result" label-width="100px">
