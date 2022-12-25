@@ -13,7 +13,10 @@
         style="width: 100%"
         border
         stripe>
-
+      <el-table-column
+          prop="pipeline_id"
+          label="申请编号">
+      </el-table-column>
       <el-table-column
           prop="stu_number"
           label="学号">

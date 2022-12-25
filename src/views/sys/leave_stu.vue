@@ -16,6 +16,11 @@
         stripe>
 
       <el-table-column
+          prop="pipeline_id"
+          label="申请编号">
+      </el-table-column>
+
+      <el-table-column
           prop="leave_reason"
           label="出校原因">
       </el-table-column>

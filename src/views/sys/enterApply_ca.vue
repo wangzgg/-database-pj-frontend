@@ -22,6 +22,10 @@
         stripe>
 
       <el-table-column
+          prop="pipeline_id"
+          label="申请编号">
+      </el-table-column>
+      <el-table-column
           prop="stu_number"
           label="学号">
       </el-table-column>
@@ -79,7 +83,7 @@
           filter-placement="bottom-end">
         <template slot-scope="scope">
           <el-tag size="small" v-if="scope.row.status === '待审核'" >待审核</el-tag>
-          <el-button v-if="scope.row.status === '待审核'" type="text" size="small" class="button" @click="check(scope.row.pipeline_id)">去审核>></el-button>
+          <el-button v-if="scope.row.status === '待审核'" type="text" size="small" class="button" @click="check(scope.row.pipeline_id,scope.row.stu_number)">去审核>></el-button>
           <el-tag size="small" v-else-if="scope.row.status === '已同意' " type="success">已同意</el-tag>
           <el-tag size="small" v-else-if="scope.row.status === '已拒绝' " type="danger">已拒绝</el-tag>
         </template>
@@ -95,7 +99,33 @@
         width="600px"
         :before-close="handleClose">
 
-      <el-form :model="editForm" :rules="editFormRules" ref="editForm" label-width="100px" class="demo-editForm">
+      <el-table
+          :data="tableData1"
+          style="width: 100%">
+        <el-table-column
+            prop="date"
+            label="填写日期">
+        </el-table-column>
+
+        <el-table-column
+            prop="temperature"
+            label="体温">
+        </el-table-column>
+
+        <el-table-column
+            prop="location"
+            label="所在位置">
+        </el-table-column>
+        <el-table-column
+            prop="report_time"
+            label="填写时间">
+        </el-table-column>
+        <el-table-column
+            prop="other_message"
+            label="其他信息">
+        </el-table-column>
+      </el-table>
+      <el-form :model="editForm" :rules="editFormRules" ref="editForm" label-width="100px" class="demo-editForm" style="margin-top: 20px">
 
         <el-form-item label="审核结果" prop="result" label-width="100px">
           <el-select v-model="editForm.result" placeholder="选择审核结果">
@@ -135,6 +165,7 @@ export default {
       total:-1,
       search:'',
       tableData: [
+      ], tableData1: [
       ],
       editForm:{
         pipeline_id:0,
@@ -156,9 +187,20 @@ export default {
 
   },
   methods:{
-    check(id){
+    check(id,stu_number){
       this.dialogVisible=true;
       this.editForm.pipeline_id=id;
+      this.$axios.get('/stu/health/report',{
+        params:{
+          stu_number:stu_number
+        }
+      })
+          .then(res => {
+            if(res.data.code === 200) {
+
+            this.tableData1=res.data.data
+            }
+          })
     },
     submitForm(formName) {
       if(this.editForm.result === '拒绝' && this.editForm.reason===''){

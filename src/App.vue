@@ -32,4 +32,9 @@ html, body, #app {
   margin: 0;
   font-size: 15px;
 }
+
+ body .el-table th.gutter{
+   display:table-cell!important;
+ }
+
 </style>
