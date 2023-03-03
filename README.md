@@ -1,4 +1,4 @@
-# shop_vue
+# database-pj-frontend
 
 ## Project setup
 ```
